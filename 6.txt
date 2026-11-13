@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Operations</title>
+</head>
+<body>
+
+    <h1>Experiment 6: Array Operations</h1>
+    <p>Name: Aashay Vaidya</p>
+    <p>Roll No: 42466</p>
+    <p>Class/Batch: BE8 P8</p>
+    <hr>
+
+    <h2>1. Create Array</h2>
+
+    <label>Enter elements separated by commas:</label>
+    <input type="text" id="elements" placeholder="10,20,30,40">
+    <button onclick="createArray()">Create Array</button>
+
+    <h3>Current Array:</h3>
+    <p id="display">[]</p>
+
+    <hr>
+
+    <h2>2. Remove Element</h2>
+
+    <input type="text" id="remove" placeholder="Enter element">
+    <br><br>
+
+    <button onclick="removeMethod()">Using Method</button>
+    <button onclick="removeLoop()">Without Method</button>
+
+    <p id="removeResult"></p>
+
+    <hr>
+
+    <h2>3. Search Element</h2>
+
+    <input type="text" id="search" placeholder="Enter element">
+    <br><br>
+
+    <button onclick="searchMethod()">Using Method</button>
+    <button onclick="searchLoop()">Without Method</button>
+
+    <p id="searchResult"></p>
+
+    <hr>
+
+    <h2>4. Empty Array</h2>
+
+    <button onclick="emptyMethod()">Using Method</button>
+    <button onclick="emptyArray()">Without Method</button>
+
+    <p id="emptyResult"></p>
+
+    <script>
+        var arr = [];
+
+        function showArray() {
+            document.getElementById("display").textContent =
+                "[" + arr.join(", ") + "]";
+        }
+
+        // Create Array
+        function createArray() {
+            var str = document.getElementById("elements").value;
+
+            if (str.trim() == "") {
+                alert("Enter array elements!");
+                return;
+            }
+
+            var temp = str.split(",");
+
+            for (var i = 0; i < temp.length; i++) {
+                temp[i] = temp[i].trim();
+
+                if (temp[i] == "") {
+                    alert("Invalid array elements!");
+                    return;
+                }
+            }
+
+            arr = temp;
+            showArray();
+        }
+
+        // Remove using splice()
+        function removeMethod() {
+            var x = document.getElementById("remove").value.trim();
+            var index = arr.indexOf(x);
+
+            if (index == -1) {
+                document.getElementById("removeResult").innerHTML =
+                    "Element not found!";
+            } else {
+                arr.splice(index, 1);
+                document.getElementById("removeResult").innerHTML =
+                    "Element removed!";
+            }
+
+            showArray();
+        }
+
+        // Remove without method
+        function removeLoop() {
+            var x = document.getElementById("remove").value.trim();
+            var found = false;
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == x) {
+                    for (var j = i; j < arr.length - 1; j++) {
+                        arr[j] = arr[j + 1];
+                    }
+
+                    arr.length--;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                document.getElementById("removeResult").innerHTML =
+                    "Element removed!";
+            } else {
+                document.getElementById("removeResult").innerHTML =
+                    "Element not found!";
+            }
+
+            showArray();
+        }
+
+        // Search using includes()
+        function searchMethod() {
+            var x = document.getElementById("search").value.trim();
+
+            if (arr.includes(x)) {
+                document.getElementById("searchResult").innerHTML =
+                    "Element found!";
+            } else {
+                document.getElementById("searchResult").innerHTML =
+                    "Element not found!";
+            }
+        }
+
+        // Search without method
+        function searchLoop() {
+            var x = document.getElementById("search").value.trim();
+            var found = false;
+
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == x) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                document.getElementById("searchResult").innerHTML =
+                    "Element found!";
+            } else {
+                document.getElementById("searchResult").innerHTML =
+                    "Element not found!";
+            }
+        }
+
+        // Empty using length
+        function emptyMethod() {
+            arr.length = 0;
+            showArray();
+
+            document.getElementById("emptyResult").innerHTML =
+                "Array emptied!";
+        }
+
+        // Empty without method
+        function emptyArray() {
+            arr = [];
+            showArray();
+
+            document.getElementById("emptyResult").innerHTML =
+                "Array emptied!";
+        }
+    </script>
+
+</body>
+</html>

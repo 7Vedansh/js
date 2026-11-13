@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Operations</title>
+</head>
+<body>
+
+    <h1>Experiment 3: String Operations</h1>
+    <p>Name: Aashay Vaidya</p>
+    <p>Roll No: 42466</p>
+    <p>Class/Batch: BE8 P8</p>
+    <hr>
+
+    <div>
+        <h2>1. Reverse String</h2>
+
+        <label>Enter String:</label>
+        <input type="text" id="rev" placeholder="Enter string">
+        <br><br>
+
+        <button onclick="reverseString()">Reverse</button>
+
+        <p id="revResult"></p>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>2. Replace Characters</h2>
+
+        <label>Original String:</label>
+        <input type="text" id="str" placeholder="Enter string">
+        <br><br>
+
+        <label>Character to Find:</label>
+        <input type="text" id="find" maxlength="1"
+               placeholder="Enter character">
+        <br><br>
+
+        <label>Replace With:</label>
+        <input type="text" id="replace" maxlength="1"
+               placeholder="Enter character">
+        <br><br>
+
+        <button onclick="replaceFirst()">Replace First</button>
+        <button onclick="replaceAll()">Replace All</button>
+
+        <p id="repResult"></p>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>3. Palindrome Check</h2>
+
+        <label>Enter String:</label>
+        <input type="text" id="pal" placeholder="Enter string">
+        <br><br>
+
+        <button onclick="checkPalindrome()">Check Palindrome</button>
+
+        <p id="palResult"></p>
+    </div>
+
+    <hr>
+
+    <script>
+
+        // 1. Reverse String
+        function reverseString() {
+            var str = document.getElementById("rev").value;
+
+            if (str.trim() == "") {
+                document.getElementById("revResult").innerHTML =
+                    "Please enter a string.";
+            } else {
+                var result = str.split("").reverse().join("");
+
+                document.getElementById("revResult").innerHTML =
+                    "Reversed String: " + result;
+            }
+        }
+
+        // 2. Replace First Character
+        function replaceFirst() {
+            var str = document.getElementById("str").value;
+            var find = document.getElementById("find").value;
+            var rep = document.getElementById("replace").value;
+
+            if (str.trim() == "" || find == "" || rep == "") {
+                document.getElementById("repResult").innerHTML =
+                    "Please fill all fields.";
+            } else if (str.indexOf(find) == -1) {
+                document.getElementById("repResult").innerHTML =
+                    "Character not found.";
+            } else {
+                var result = str.replace(find, rep);
+
+                document.getElementById("repResult").innerHTML =
+                    "Result: " + result;
+            }
+        }
+
+        // 3. Replace All Characters
+        function replaceAll() {
+            var str = document.getElementById("str").value;
+            var find = document.getElementById("find").value;
+            var rep = document.getElementById("replace").value;
+
+            if (str.trim() == "" || find == "" || rep == "") {
+                document.getElementById("repResult").innerHTML =
+                    "Please fill all fields.";
+            } else if (str.indexOf(find) == -1) {
+                document.getElementById("repResult").innerHTML =
+                    "Character not found.";
+            } else {
+                var result = str.split(find).join(rep);
+
+                document.getElementById("repResult").innerHTML =
+                    "Result: " + result;
+            }
+        }
+
+        // 4. Check Palindrome
+        function checkPalindrome() {
+            var str = document.getElementById("pal").value;
+
+            if (str.trim() == "") {
+                document.getElementById("palResult").innerHTML =
+                    "Please enter a string.";
+            } else {
+                var clean = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+                var reverse = clean.split("").reverse().join("");
+
+                if (clean == "") {
+                    document.getElementById("palResult").innerHTML =
+                        "Please enter letters or numbers.";
+                } else if (clean == reverse) {
+                    document.getElementById("palResult").innerHTML =
+                        str + " is a Palindrome.";
+                } else {
+                    document.getElementById("palResult").innerHTML =
+                        str + " is NOT a Palindrome.";
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>

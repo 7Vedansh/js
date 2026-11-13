@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Timer</title>
+</head>
+<body>
+
+    <h1>Experiment 5: Countdown Timer</h1>
+    <p>Name: Aashay Vaidya</p>
+    <p>Roll No: 42466</p>
+    <p>Class/Batch: BE8 P8</p>
+    <hr>
+
+    <h2>Countdown Timer</h2>
+
+    <label>Target Date:</label>
+    <input type="date" id="date">
+    <br><br>
+
+    <label>Target Time:</label>
+    <input type="time" id="time">
+    <br><br>
+
+    <button onclick="startTimer()">Start Timer</button>
+    <button onclick="resetTimer()">Reset Timer</button>
+
+    <hr>
+
+    <h2>Time Remaining</h2>
+    <h3 id="result">00 Days 00 Hours 00 Minutes 00 Seconds</h3>
+
+    <script>
+        var interval;
+
+        function startTimer() {
+            clearInterval(interval);
+
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+
+            if (date == "" || time == "") {
+                document.getElementById("result").innerHTML =
+                    "Please select date and time.";
+                return;
+            }
+
+            var target = new Date(date + "T" + time);
+
+            if (isNaN(target.getTime()) || target <= new Date()) {
+                document.getElementById("result").innerHTML =
+                    "Please select a valid future date and time.";
+                return;
+            }
+
+            updateTimer();
+            interval = setInterval(updateTimer, 1000);
+
+            function updateTimer() {
+                var now = new Date();
+                var diff = target - now;
+
+                if (diff <= 0) {
+                    clearInterval(interval);
+                    document.getElementById("result").innerHTML =
+                        "Time's Up!";
+                    return;
+                }
+
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                var minutes = Math.floor((diff / (1000 * 60)) % 60);
+                var seconds = Math.floor((diff / 1000) % 60);
+
+                document.getElementById("result").innerHTML =
+                    days + " Days " +
+                    hours + " Hours " +
+                    minutes + " Minutes " +
+                    seconds + " Seconds";
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(interval);
+
+            document.getElementById("date").value = "";
+            document.getElementById("time").value = "";
+
+            document.getElementById("result").innerHTML =
+                "00 Days 00 Hours 00 Minutes 00 Seconds";
+        }
+    </script>
+
+</body>
+</html>

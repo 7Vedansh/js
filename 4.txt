@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Comparison</title>
+</head>
+<body>
+
+    <h1>Experiment 4: String Comparison</h1>
+    <p>Name: Aashay Vaidya</p>
+    <p>Roll No: 42466</p>
+    <p>Class/Batch: BE8 P8</p>
+    <hr>
+
+    <h2>Compare Two Strings</h2>
+
+    <label>String 1:</label>
+    <input type="text" id="str1" placeholder="Enter first string">
+    <br><br>
+
+    <label>String 2:</label>
+    <input type="text" id="str2" placeholder="Enter second string">
+    <br><br>
+
+    <button onclick="compareStrings()">Compare Strings</button>
+
+    <hr>
+
+    <h2>Comparison Results</h2>
+    <div id="result"></div>
+
+    <script>
+        function compareStrings() {
+            var a = document.getElementById("str1").value;
+            var b = document.getElementById("str2").value;
+            var result = "";
+
+            if (a.trim() == "" || b.trim() == "") {
+                document.getElementById("result").innerHTML =
+                    "Please enter both strings.";
+                return;
+            }
+
+            // 1. Length Comparison
+            result += "<p>1. Length Equal: " +
+                      (a.length == b.length) + "</p>";
+
+            // 2. Loose Equality
+            result += "<p>2. Loose Equality (==): " +
+                      (a == b) + "</p>";
+
+            // 3. Strict Equality
+            result += "<p>3. Strict Equality (===): " +
+                      (a === b) + "</p>";
+
+            // 4. Locale Comparison
+            var x = a.localeCompare(b);
+
+            if (x == 0) {
+                result += "<p>4. Locale Compare: Equal</p>";
+            } else if (x < 0) {
+                result += "<p>4. Locale Compare: First comes before second</p>";
+            } else {
+                result += "<p>4. Locale Compare: First comes after second</p>";
+            }
+
+            // 5. Case-Insensitive Comparison
+            if (a.toLowerCase() == b.toLowerCase()) {
+                result += "<p>5. Case-Insensitive: Equal</p>";
+            } else {
+                result += "<p>5. Case-Insensitive: Not Equal</p>";
+            }
+
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>

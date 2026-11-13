@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object and Array</title>
+</head>
+<body>
+
+    <h1>Experiment 7: Object and Array</h1>
+    <p>Name: Aashay Vaidya</p>
+    <p>Roll No: 42466</p>
+    <p>Class/Batch: BE8 P8</p>
+    <hr>
+
+    <h2>1. Create Array</h2>
+
+    <label>Enter array elements:</label>
+    <input type="text" id="elements" placeholder="10,20,30">
+
+    <button onclick="createArray()">Create Array</button>
+
+    <p id="original">Original Array: []</p>
+
+    <hr>
+
+    <h2>2. Append Object</h2>
+
+    <label>Enter Object or Array:</label>
+    <input type="text" id="object" placeholder='{"name":"Ram"}'>
+
+    <button onclick="appendObject()">Append Object</button>
+
+    <p id="result"></p>
+
+    <hr>
+
+    <h2>3. Check if Object is an Array</h2>
+
+    <button onclick="checkArray()">Check Array</button>
+
+    <p id="check"></p>
+
+    <script>
+        var arr = [];
+        var obj;
+
+        function createArray() {
+            var str = document.getElementById("elements").value;
+
+            if (str.trim() == "") {
+                alert("Enter array elements!");
+                return;
+            }
+
+            arr = str.split(",");
+            obj = undefined;
+
+            document.getElementById("original").textContent =
+                "Original Array: " + JSON.stringify(arr);
+
+            document.getElementById("result").innerHTML = "";
+            document.getElementById("check").innerHTML = "";
+        }
+
+        function appendObject() {
+            var value = document.getElementById("object").value;
+
+            try {
+                obj = JSON.parse(value);
+                arr.push(obj);
+
+                document.getElementById("result").textContent =
+                    "Updated Array: " + JSON.stringify(arr);
+
+                document.getElementById("check").innerHTML = "";
+            } catch (error) {
+                document.getElementById("result").innerHTML =
+                    "Enter a valid object or array!";
+            }
+        }
+
+        function checkArray() {
+            if (obj === undefined) {
+                document.getElementById("check").innerHTML =
+                    "Append an object first!";
+                return;
+            }
+
+            if (Array.isArray(obj)) {
+                document.getElementById("check").innerHTML =
+                    "Appended object is an Array!";
+            } else {
+                document.getElementById("check").innerHTML =
+                    "Appended object is not an Array!";
+            }
+        }
+    </script>
+
+</body>
+</html>

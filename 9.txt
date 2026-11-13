@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information Form</title>
+</head>
+<body>
+
+    <h1>Student Information Form</h1>
+    <p>Name: Aashay Vaidya</p>
+    <p>Roll No: 42466</p>
+    <p>Class/Batch: BE8 P8</p>
+    <hr>
+
+    <form onsubmit="return validateForm()">
+
+        <label>Name:</label>
+        <input type="text" id="name">
+        <br><br>
+
+        <label>Address:</label>
+        <input type="text" id="address">
+        <br><br>
+
+        <label>City:</label>
+        <input type="text" id="city">
+        <br><br>
+
+        <label>State:</label>
+        <input type="text" id="state">
+        <br><br>
+
+        <label>Gender:</label>
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        <br><br>
+
+        <label>Mobile Number:</label>
+        <input type="text" id="mobile">
+        <br><br>
+
+        <label>Email ID:</label>
+        <input type="text" id="email">
+        <br><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+
+    </form>
+
+    <h3 id="message"></h3>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value.trim();
+            var address = document.getElementById("address").value.trim();
+            var city = document.getElementById("city").value.trim();
+            var state = document.getElementById("state").value.trim();
+            var gender = document.getElementById("gender").value;
+            var mobile = document.getElementById("mobile").value.trim();
+            var email = document.getElementById("email").value.trim();
+
+            var namePattern = /^[A-Za-z ]+$/;
+            var mobilePattern = /^[0-9]{10}$/;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            var message = document.getElementById("message");
+
+            if (name == "" || address == "" || city == "" ||
+                state == "" || gender == "" || mobile == "" ||
+                email == "") {
+                message.innerHTML = "Please fill all fields!";
+            }
+            else if (!namePattern.test(name)) {
+                message.innerHTML = "Enter a valid name!";
+            }
+            else if (!namePattern.test(city) ||
+                     !namePattern.test(state)) {
+                message.innerHTML = "Enter a valid city and state!";
+            }
+            else if (!mobilePattern.test(mobile)) {
+                message.innerHTML = "Enter a valid 10-digit mobile number!";
+            }
+            else if (!emailPattern.test(email)) {
+                message.innerHTML = "Enter a valid email ID!";
+            }
+            else {
+                document.body.innerHTML =
+                    "<h1>Congratulations!</h1>" +
+                    "<h2>Welcome " + name + "!</h2>" +
+                    "<p>Your form has been submitted successfully.</p>";
+            }
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>
